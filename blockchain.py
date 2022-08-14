@@ -1,16 +1,16 @@
-blockchain = [[1]]
+blockchain = []
 
 
-def get_lasat_blockchain_value():
+def get_last_blockchain_value():
     return blockchain[-1]
 
 
-def add_value(transaction_amount):
-    blockchain.append([get_lasat_blockchain_value(), transaction_amount])
+def add_value(transaction_amount, last_transaction=[1]):
+    blockchain.append([last_transaction, transaction_amount])
 
 
 add_value(2)
-add_value(4)
-add_value(8)
+add_value(4, get_last_blockchain_value())
+add_value(8, get_last_blockchain_value())
 
 print(blockchain)
