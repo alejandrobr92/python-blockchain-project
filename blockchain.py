@@ -1,4 +1,7 @@
 # Initializing blockchain list
+from tkinter.tix import Tree
+
+
 blockchain = []
 
 
@@ -33,9 +36,29 @@ def print_blockchain_elements():
         print(block)
 
 
+def verify_chain():
+    block_index = 0
+    is_valid = True
+    for block in blockchain:
+        if block_index == 0:
+            block_index += 1
+            continue
+        elif block[0] == blockchain[block_index - 1]:
+            print(blockchain)
+            print(block[0])
+            print(blockchain[block_index - 1])
+            is_valid = True
+        else:
+            is_valid = False
+            break
+        block_index += 1
+    return is_valid
+
+
+waiting_for_input = True
 while True:
     print('Please choose')
-    print('1: Add a new transactino value')
+    print('1: Add a new transaction value')
     print('2: Output the blockchain blocks')
     print('q: Quit')
     user_choice = get_user_choice()
@@ -44,10 +67,16 @@ while True:
         add_transaction(tx_amount, get_last_blockchain_value())
     elif user_choice == 2:
         print_blockchain_elements()
+    elif user_choice == 'h':
+        if len(blockchain) >= 1:
+            blockchain[0] = [2]
     elif user_choice == 'q':
-        break
+        waiting_for_input = False
     else:
         print('Invalid input')
     print('Choice registered')
+    if not verify_chain():
+        print('Invalid blockchain')
+        waiting_for_input = False
 
 print('Done')
