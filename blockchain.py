@@ -17,14 +17,17 @@ def get_user_input():
     return float(input('Your transaction amount: '))
 
 
+# Get the first transaction input and add the value to the blockchain
 tx_amount = get_user_input()
 add_value(tx_amount)
 
-tx_amount = get_user_input()
-add_value(last_transaction=get_last_blockchain_value(),
-          transaction_amount=tx_amount)
+while True:
+    tx_amount = get_user_input()
+    add_value(tx_amount, get_last_blockchain_value())
 
-tx_amount = get_user_input()
-add_value(tx_amount, get_last_blockchain_value())
+    # Output the blockchain list to the console
+    for block in blockchain:
+        print('Outputting block')
+        print(block)
 
-print(blockchain)
+print('Done')
